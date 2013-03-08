@@ -126,22 +126,13 @@ def custom_insert(input_list, index, value):
     """custom_insert(input_list, index, value) imitates
     input_list.insert(index, value)
     """
-    if index == 0:
-        before_value = 0
-        after_value = 0
-    else:
-        before_value = index + 1
-        after_value = index - 1
+    for i in range(custom_len(input_list) + 1):
+        return input_list[:i] + [value] + input_list[i:]
 
-    before_list = input_list[:before_value]
 
-    after_list = input_list[after_value:]
+months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug','Sep', 'Oct', 'Nov', 'Dec']
+print custom_insert(months, 3, "a")
 
-    custom_append(before_list, value)
-
-    final_list = custom_extend(before_list, after_list)
-
-    return final_list
 
 def custom_remove(input_list, value):
     """custom_remove(input_list, value) imitates input_list.remove(value)"""
