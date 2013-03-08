@@ -112,54 +112,96 @@ def custom_len(input_list):
 def custom_append(input_list, value):
     """custom_append(input_list, value) imitates input_list.append(value)"""
     input_list[custom_len(input_list):] = [value]
-    return input_list
 
 
 def custom_extend(input_list, values):
     """custom_extend(input_list, values) imitates input_list.extend(values)"""
     for x in values:
         input_list[custom_len(input_list):] = [x]
-    
-    return input_list
 
 def custom_insert(input_list, index, value):
     """custom_insert(input_list, index, value) imitates
     input_list.insert(index, value)
     """
-    for i in range(custom_len(input_list) + 1):
-        return input_list[:i] + [value] + input_list[i:]
-
-
-months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug','Sep', 'Oct', 'Nov', 'Dec']
-print custom_insert(months, 3, "a")
-
+    input_list[index:index] = [value]
 
 def custom_remove(input_list, value):
-    """custom_remove(input_list, value) imitates input_list.remove(value)"""
-    pass
+    """
+    custom_remove(input_list, value) imitates input_list.remove(value)
+    - Remove the first item from the list whose value is x. It is an error if there is no such item.
+    * List index deletion (del some_list[index])
+    * List slicing deletion (del some_list[start:end])
+    """
+    del input_list[value]
 
 def custom_pop(input_list):
-    """custom_pop(input_list) imitates input_list.pop()"""
-    pass
+    """
+    custom_pop(input_list) imitates input_list.pop()
+    list.pop([i])
+    Remove the item at the given position in the list, and return it. If no index is specified, a.pop() 
+    removes and returns the last item in the list. (The square brackets around the i in the method 
+    signature denote that the parameter is optional, not that you should type square brackets at that position. 
+    You will see this notation frequently in the Python Library Reference.)
+    """
+    temp = input_list[-1]
+    del input_list[-1]
+    return temp
 
 def custom_index(input_list, value):
-    """custom_index(input_list, value) imitates input_list.index(value)"""
-    pass
+    """
+    custom_index(input_list, value) imitates input_list.index(value)
+    list.index(x)
+    Return the index in the list of the first item whose value is x. It is an error if there is no such item.
+    """
+    for i in range(custom_len(input_list)):
+            if input_list[i] == value:
+                return i
 
 def custom_count(input_list, value):
-    """custom_count(input_list, value) imitates input_list.count(value)"""
-    pass
+    """
+    custom_count(input_list, value) imitates input_list.count(value)
+    Return the number of times x appears in the list.
+    """
+    count = 0
+    for i in range(custom_len(input_list)):
+        if input_list[i] == value:
+            count += 1
+
+    return count
 
 def custom_reverse(input_list):
-    """custom_reverse(input_list) imitates input_list.reverse()"""
-    pass
+    """
+    custom_reverse(input_list) imitates input_list.reverse()
+    Reverse the elements of the list, in place.
+    """
+    list2 = []
+    count = 0
+
+    for i in range(custom_len(input_list)):
+        count += -1
+        custom_append(list2, input_list[count])
+
+    input_list[:] = list2[:]
+
 
 def custom_contains(input_list, value):
     """custom_contains(input_list, value) imitates (value in input_list)"""
-    pass
+    for i in range(custom_len(input_list)):
+        if value == input_list[i]:
+            return True
+    
+    return False
+
 
 def custom_equality(some_list, another_list):
     """custom_equality(some_list, another_list) imitates
     (some_list == another_list)
     """
-    pass
+    if custom_len(some_list) != custom_len(another_list):
+        return False
+    else:
+        for i in range(custom_len(some_list)):
+            if some_list[i] != another_list[i]:
+                return False
+
+    return True
